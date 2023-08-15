@@ -1,3 +1,4 @@
+import 'package:destini/story_brain.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const Destini());
@@ -15,6 +16,7 @@ class Destini extends StatelessWidget {
   }
 }
 
+StoryBrain storyBrain = StoryBrain();
 
 class StoryPage extends StatefulWidget {
   const StoryPage({super.key});
@@ -30,7 +32,7 @@ class _StoryPageState extends State<StoryPage> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/background.jpg'),
+            image: AssetImage('images/bck.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -45,10 +47,12 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 12,
                 child: Center(
                   child: Text(
-                    'Story Text will go here',
+                    storyBrain.getStory(),
                     style: TextStyle(
                       fontSize: 25.0,
+                      color: Colors.yellowAccent[100],
                     ),
+                      textAlign: TextAlign.justify,
                   ),
                 ),
               ),
@@ -60,9 +64,12 @@ class _StoryPageState extends State<StoryPage> {
                   ),
                   onPressed: () {
                     // choice 1 pressed
+                    setState(() {
+                      storyBrain.nextStory(choiceNumber: 1);
+                    });
                   },
                   child: Text(
-                    'Choice 1',
+                    storyBrain.getChoice1(),
                     style: TextStyle(
                       fontSize: 20.0,
                       color: Colors.white,
@@ -81,9 +88,12 @@ class _StoryPageState extends State<StoryPage> {
                   ),
                   onPressed: () {
                     // choice 2 pressed
+                    setState(() {
+                      storyBrain.nextStory(choiceNumber: 2);
+                    });
                   },
                   child: Text(
-                    'Choice 2',
+                    storyBrain.getChoice2(),
                     style: TextStyle(
                       fontSize: 20.0,
                       color: Colors.white,
