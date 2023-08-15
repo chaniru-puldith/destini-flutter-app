@@ -11,7 +11,7 @@ class Destini extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: StoryPage(),
+      home: const StoryPage(),
     );
   }
 }
@@ -58,45 +58,51 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,
-                  ),
-                  onPressed: () {
-                    // choice 1 pressed
-                    setState(() {
-                      storyBrain.nextStory(choiceNumber: 1);
-                    });
-                  },
-                  child: Text(
-                    storyBrain.getChoice1(),
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
+                child: Visibility(
+                  visible: true,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    onPressed: () {
+                      // choice 1 pressed
+                      setState(() {
+                        storyBrain.nextStory(choiceNumber: 1);
+                      });
+                    },
+                    child: Text(
+                      storyBrain.getChoice1(),
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Expanded(
                 flex: 2,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                  onPressed: () {
-                    // choice 2 pressed
-                    setState(() {
-                      storyBrain.nextStory(choiceNumber: 2);
-                    });
-                  },
-                  child: Text(
-                    storyBrain.getChoice2(),
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
+                child: Visibility(
+                  visible: storyBrain.buttonShouldBeVisible(),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                    ),
+                    onPressed: () {
+                      // choice 2 pressed
+                      setState(() {
+                        storyBrain.nextStory(choiceNumber: 2);
+                      });
+                    },
+                    child: Text(
+                      storyBrain.getChoice2(),
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
